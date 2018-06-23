@@ -114,7 +114,11 @@ gulp.task('watch:js', function() {
 gulp.task('watch:markup', function() {
     for (let copy of config.copy) {
         if (copy.watch) {
-            gulp.watch(config.dir.src+'/'+copy.watch, gulp.task('copy'));
+            let watch = [];
+            for (const pattern of copy.watch) {
+                watch.push(config.dir.src+'/'+pattern);
+            }
+            gulp.watch(watch, gulp.task('copy'));
         }
     }
 });
